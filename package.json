@@ -1,0 +1,27 @@
+{
+    "name": "ngx-month-picker",
+    "version": "0.0.1",
+    "author": "Juan Manuel Meneses Ibarra <com.jmenesesi@gmail.com> (https://jmenesesi.com)",
+    "keywords": [
+        "Angular",
+        "Calendar",
+        "Month",
+        "Angular8",
+        "Date",
+        "Picker",
+        "Range",
+        "jmenesesi"
+    ],
+    "license": "(GNU General Public License v3.0)",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jmenesesi/ngx-month-picker.git"
+    },
+    "peerDependencies": {
+        "@angular/common": "^10.1.6",
+        "@angular/core": "^10.1.6"
+    },
+    "dependencies": {
+        "tslib": "^2.0.0"
+    }
+}

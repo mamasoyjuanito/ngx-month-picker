@@ -1,0 +1,176 @@
+  :host::focus,
+ :host::ng-deep:focus,
+ .calendar-widget:focus {
+     outline: none!important;
+ }
+ 
+ .calendar-ui {
+     z-index: 1003;
+     width: 350px;
+     background-color: white;
+ }
+ 
+ .calendar-input-container {
+     background: #F5F5F6 !important;
+     border: solid 1px #C2D1D9 !important;
+     color: #A8B0BA !important;
+     font-family: "open_sansitalic", sans-serif !important;
+     line-height: 17px;
+     min-height: 48px;
+     display: flex;
+     align-items: center;
+     border-radius: 3px;
+     width: 100%;
+     font-size: 16px;
+     letter-spacing: 0;
+ }
+ 
+ .calendar-input-value {
+     padding-left: 10px;
+     padding-right: 10px;
+     text-overflow: ellipsis;
+     white-space: nowrap;
+     overflow: hidden;
+ }
+ 
+ .outerCard {
+     touch-action: none;
+     overflow: hidden;
+     width: 350px;
+     /*height: 350px;*/
+     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+ }
+ 
+ .topPanel {
+     width: 350px;
+     height: 44px;
+     text-align: center;
+     line-height: 64px;
+ }
+ 
+ .prevYearButton {
+     float: left;
+ }
+ 
+ .nextYearButton {
+     float: right;
+ }
+ 
+ button {
+     width: 64px;
+     height: 64px;
+     background: none;
+     border: none;
+     margin: 0;
+     padding: 0;
+     cursor: pointer;
+ }
+ 
+ button:focus {
+     outline: 0;
+ }
+ 
+ i {
+     border: solid black;
+     border-width: 0 3px 3px 0;
+     display: inline-block;
+     padding: 6px;
+ }
+ 
+ .right {
+     transform: rotate(-45deg);
+     -webkit-transform: rotate(-45deg);
+ }
+ 
+ .left {
+     transform: rotate(135deg);
+     -webkit-transform: rotate(135deg);
+ }
+ 
+ .topPanel.yearLabel {
+     display: inline-block;
+     margin: 0 auto;
+ }
+ 
+ .contentPanel {
+     padding: 32px 6px;
+ }
+ 
+ .footerPanel {
+     display: flex;
+ }
+ 
+ .monthItem {
+     display: inline-block;
+     height: 54px;
+     width: 54px;
+     cursor: pointer;
+     text-align: center;
+     line-height: 54px;
+     margin-top: 1px;
+     margin-bottom: 1px;
+ }
+ 
+ .monthItem:hover {
+     border-radius: 100%;
+     background-color: #F5F5F6;
+     color: #A8B0BA;
+ }
+ 
+ .isEdge {
+     border-radius: 100%;
+     background-color: #1474a4;
+     color: white;
+ }
+ 
+ .inRange {
+     background-color: #1474a4;
+     opacity: 0.5;
+     color: white;
+ }
+ 
+ .isLowerEdge {
+     background-color: none;
+     background: linear-gradient(to right, transparent 50%, #1474a4 50%);
+ }
+ 
+ .isUpperEdge {
+     background-color: none;
+     background: linear-gradient(to right, #1474a4 50%, transparent 50%);
+ }
+ 
+ .notCurrentYear {
+     color: #c4cbd6;
+ }
+ 
+ .clean-btn {
+     text-decoration: none;
+     width: 50%;
+     display: inline-block;
+     font-weight: 400;
+     color: #A8B0BA;
+     background-color: #F5F5F6;
+     text-align: center;
+     vertical-align: middle;
+     user-select: none;
+     border: 1px solid transparent;
+     padding: .375rem .75rem;
+     font-size: 1rem;
+     line-height: 1.5;
+ }
+ 
+ .accept-btn {
+     text-decoration: none;
+     width: 50%;
+     display: inline-block;
+     font-weight: 400;
+     text-align: center;
+     vertical-align: middle;
+     user-select: none;
+     border: 1px solid transparent;
+     padding: .375rem .75rem;
+     font-size: 1rem;
+     line-height: 1.5;
+     color: white;
+     background-color: #1474a4;
+ }
