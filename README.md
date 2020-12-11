@@ -58,7 +58,7 @@ Se puede personalizar, para ello es necesario asignar la clase para cada parte d
 | acceptBtnClass | Clase para el botón que cierra el calendario y emite el valor actual |
 
 
-
+Este componente lo hice basandome en el siguiente [articulo](https://medium.com/better-programming/month-range-picker-in-angular-8-4ce93ef7d76b). 
 ## Github
 
 Puedes consultar el código en el repositorio de [Github](https://github.com/jmenesesi/ngx-month-picker).
