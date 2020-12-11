@@ -4,14 +4,14 @@ Esta libreria fue generada con [Angular CLI](https://github.com/angular/angular-
 
 ## Instalación
 
-Ejecutar `npm i --save ngx-month-picker` para instalar la dependencia en tu proyecto.
+Ejecutar `npm i --save ngx-month-picker-range` para instalar la dependencia en tu proyecto.
 
 ## Uso
 
 Para hacer uso de la libreria debes importarla en tu `app.module.ts` como en el ejemplo:
 
 ```ts 
-    import {NgxMonthPickerModule} from 'ngx-month-picker';
+    import {NgxMonthPickerModule} from 'ngx-month-picker-range';
     ...
     imports: [
         ...
