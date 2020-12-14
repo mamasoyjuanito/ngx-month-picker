@@ -4,9 +4,216 @@ import { DomHandler } from './domhandler';
 
 @Component({
   selector: 'ngx-month-picker',
-  templateUrl: './component.html',
-  styleUrls:['./styles.scss'],
-  encapsulation: ViewEncapsulation.None,
+  template:`
+  <div class="calendar-widget" #select>
+    <div [ngClass]="inputContainerClass" (click)="onShowCalendar($event)" role="listbox" #calendarInputContainer [title]="valueText">
+        <span [ngClass]="inputValueClass">{{valueText}}</span>
+    </div>
+    <div [ngClass]="calendarContainerClass" #calendarUI style="display: none;">
+        <div class="outerCard">
+            <div class="topPanel">
+                <button class="prevYearButton" (click)="decrementYear()">
+                    <i class="arrow arrow-left"></i>
+                </button>
+                <span class="yearLabel">{{ years[currentYearIndex] }}</span>
+                <button class="nextYearButton" (click)="incrementYear()">
+                    <i class="arrow arrow-right"></i>
+                </button>
+            </div>
+            <div class="contentPanel" #calendarContent>
+                <div (click)="onClick(i)" *ngFor="let month of monthDataSlice; let i = index" [ngClass]="[monthItemClass, 
+                        (rangeIndexes[0]===globalIndexOffset+i || rangeIndexes[1]===globalIndexOffset+i) ? edgeClass: '', 
+                        (currentYearIndex===0? i > 11:(i < 6 || i > 17)) ? notYearClass : '']">
+                    <div [id]="i" class="monthItemHighlight" [ngClass]="[ month.isInRange ? inRangeClass : '', 
+                    month.isLowerEdge ? lowerEdgeClass : '', month.isUpperEdge ? upperEdgeClass : '' ]">
+                        {{ month.monthName }}
+                    </div>
+                </div>
+            </div>
+            <div class="footerPanel">
+                <a id="cleanBtn" href="javascript:void(0)" [ngClass]="cleanBtnClass" (click)="clearData()">
+                    Limpiar
+                </a>
+                <a id="acceptBtn" href="javascript:void(0)" [ngClass]="acceptBtnClass" (click)="emitData()">
+                    Aceptar
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+  `,
+  styles:[`
+  .calendar-ui {
+    z-index: 1003;
+    width: 350px;
+    background-color: white;
+}
+
+.calendar-input-container {
+    background: #F5F5F6 !important;
+    border: solid 1px #C2D1D9 !important;
+    color: #A8B0BA !important;
+    font-family: "open_sansitalic", sans-serif !important;
+    line-height: 17px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    width: 100%;
+    font-size: 16px;
+    letter-spacing: 0;
+}
+
+.calendar-input-value {
+    padding-left: 10px;
+    padding-right: 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.outerCard {
+    touch-action: none;
+    overflow: hidden;
+    width: inherit;
+    /*height: 350px;*/
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.topPanel {
+    width: inherit;
+    height: 44px;
+    text-align: center;
+    line-height: 64px;
+}
+
+.prevYearButton {
+    float: left;
+}
+
+.nextYearButton {
+    float: right;
+}
+
+button {
+    width: 64px;
+    height: 64px;
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+button:focus {
+    outline: 0;
+}
+
+i {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 6px;
+}
+
+.arrow-right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.arrow-left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.topPanel.yearLabel {
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.contentPanel {
+    padding: 32px 6px;
+}
+
+.footerPanel {
+    display: flex;
+}
+
+.monthItem {
+    display: inline-block;
+    height: 54px;
+    width: 54px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 54px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+.monthItem:hover {
+    border-radius: 100%;
+    background-color: #F5F5F6;
+    color: #A8B0BA;
+}
+
+.isEdge {
+    border-radius: 100%;
+    background-color: #1474a4;
+    color: white;
+}
+
+.inRange {
+    background-color: #1474a4;
+    opacity: 0.5;
+    color: white;
+}
+
+.isLowerEdge {
+    background-color: none;
+    background: linear-gradient(to right, transparent 50%, #1474a4 50%);
+}
+
+.isUpperEdge {
+    background-color: none;
+    background: linear-gradient(to right, #1474a4 50%, transparent 50%);
+}
+
+.notCurrentYear {
+    color: #c4cbd6;
+}
+
+.clean-btn {
+    text-decoration: none;
+    width: 50%;
+    display: inline-block;
+    font-weight: 400;
+    color: #A8B0BA;
+    background-color: #F5F5F6;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.accept-btn {
+    text-decoration: none;
+    width: 50%;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: white;
+    background-color: #1474a4;
+}
+  `],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -216,14 +423,13 @@ export class NgxMonthPickerComponent implements OnInit, OnDestroy, AfterContentI
   }
 
   appendOverlay() {
-    console.log(this.appendTo);
     if (this.appendTo) {
       if (this.appendTo === 'body')
         document.body.appendChild(this.calendarUI.nativeElement);
       else
         DomHandler.appendChild(this.calendarUI, this.appendTo);
     }
-    this.calendarUI.nativeElement.style.width = DomHandler.getWidth(this.containerViewChild.nativeElement) + 'px';
+    //this.calendarUI.nativeElement.style.width = DomHandler.getWidth(this.containerViewChild.nativeElement) + 'px';
   }
 
   restoreOverlayAppend() {
@@ -254,7 +460,6 @@ export class NgxMonthPickerComponent implements OnInit, OnDestroy, AfterContentI
       return;
     }
     if (this.rangeIndexes[0] !== null && this.rangeIndexes[1] !== null) {
-      console.log("Entra a limpiar ")
       this.clearData();
     }
     if (this.rangeIndexes[0] === null) {
@@ -442,7 +647,7 @@ export class NgxMonthPickerComponent implements OnInit, OnDestroy, AfterContentI
 
 
 function onKeydown(event: KeyboardEvent, component?: NgxMonthPickerComponent) {
-  console.log(event);
+  
   switch (event.which) {
     //down
     case 40:

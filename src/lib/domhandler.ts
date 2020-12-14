@@ -136,6 +136,7 @@ export class DomHandler {
         let targetOffset = target.getBoundingClientRect();
         let windowScrollTop = this.getWindowScrollTop();
         let windowScrollLeft = this.getWindowScrollLeft();
+        let windowScrollRight = this.getWindowScrollRght();
         let viewport = this.getViewport();
         let top, left;
 
@@ -151,13 +152,11 @@ export class DomHandler {
             top = targetOuterHeight + targetOffset.top + windowScrollTop;
             element.style.transformOrigin = 'top';
         }
-
         if (targetOffset.left + elementOuterWidth > viewport.width)
             left = Math.max(0, targetOffset.left + windowScrollLeft + targetOuterWidth - elementOuterWidth);
         else
             left = targetOffset.left + windowScrollLeft;
 
-        console.log(top, left);
         element.style.top = top + 'px';
         element.style.left = left + 'px';
         element.style.position = 'absolute';
@@ -259,6 +258,11 @@ export class DomHandler {
     public static getWindowScrollLeft(): number {
         let doc = document.documentElement;
         return (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0);
+    }
+
+    public static getWindowScrollRght(): number {
+        let doc = document.documentElement;
+        return (window.pageXOffset || doc.scrollWidth) - (doc.scrollWidth || 0);
     }
 
     public static matches(element, selector: string): boolean {
