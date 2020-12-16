@@ -41,6 +41,7 @@ Las propiedades del componente son:
 | mode | string (single/range) | Por defecto "single" |
 | firstYear | number | Por defecto año en curso - 5 |
 | lastYear | number | Por defecto año en curso + 5 |
+| locale | string | Por defecto 'es-MX' |
 
 Se puede personalizar, para ello es necesario asignar la clase para cada parte del componente
 

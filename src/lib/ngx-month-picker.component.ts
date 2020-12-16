@@ -250,6 +250,8 @@ export class NgxMonthPickerComponent implements OnInit, OnDestroy, AfterContentI
   @Input('cleanBtnClass') cleanBtnClass: string = "clean-btn";
   @Input('acceptBtnClass') acceptBtnClass: string = "accept-btn";
 
+  @Input('locale') locale: string = "es-MX";
+
   @ViewChild("calendarInputContainer", { static: false }) calendarInputContainer: ElementRef;
   @ViewChild("calendarUI", { static: false }) calendarUI: ElementRef;
   @ViewChild("calendarContent", { static: false }) calendarContent: ElementRef;
@@ -563,7 +565,8 @@ export class NgxMonthPickerComponent implements OnInit, OnDestroy, AfterContentI
 
   initMonthLabels() {
     this.months = new Array(12).fill(0).map((_, i) => {
-      return new Date(`${i + 1}/1`).toLocaleDateString(undefined, { month: 'short' })
+      //console.log(new Date(`${i + 1}/1/1`).toLocaleDateString(this.locale, { month: 'short' }));
+      return new Date(`${i + 1}/1/1`).toLocaleDateString(this.locale, { month: 'short' })
     });
   };
 
